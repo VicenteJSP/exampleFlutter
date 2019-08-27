@@ -25,15 +25,37 @@ class _ContadorPageState extends State {
           mainAxisAlignment: MainAxisAlignment.center,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          setState(() {
-            _conteo++;
-            print(_conteo);
-          });
-        },
-      ),
+      floatingActionButton: _crearBotones(),
     );
   }
+
+  Widget _crearBotones() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        SizedBox(width: 20.0),
+        FloatingActionButton( 
+          child: Icon(Icons.refresh),
+          onPressed: _restablecer,
+        ),
+        Expanded(
+          child: SizedBox( width: 15.0 ),
+        ),
+        FloatingActionButton(
+          child: Icon(Icons.remove),
+          onPressed: _restar,
+        ),
+        SizedBox( width: 5.0 ),
+        FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: _agregar,
+        )
+      ],
+    );
+  }
+
+  void _agregar() => setState(() => _conteo++ );
+  void _restar() => setState(() => _conteo > 0 ?_conteo-- : print('No quiero numeros negativos') );
+  void _restablecer() => setState(() => _conteo = 0 );
+  
 }
